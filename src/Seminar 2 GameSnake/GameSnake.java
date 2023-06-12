@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.lang.management.GarbageCollectorMXBean;
 
 public class GameSnake extends JFrame {
     final String TITLE_OF_PROGRAM = "Classic Game Snake";
@@ -16,21 +17,21 @@ public class GameSnake extends JFrame {
     final static int KEY_UP = 38;
     final static int KEY_RIGHT = 39;
     final static int KEY_DOWN = 40;
+    final static int KEY_SPACE = 32;
     final int START_SNAKE_SIZE = 5;
     final int START_SNAKE_X = CANVAS_WIDTH / 2;
     final int START_SNAKE_Y = CANVAS_HEIGHT / 2;
     final int SNAKE_DELAY = 150;
     int snakeSize = 0;
     static boolean gameOver = false;
-    int currentDelay = SNAKE_DELAY;
 
     Canvas canvas;
     Snake snake;
     Food food;
     Poison poison;
 
-    public static void main(String[] args) {
-        new GameSnake().game();
+    public static void main(String[] args) throws RuntimeException {
+            new GameSnake().game();
     }
 
     public GameSnake() {
@@ -44,9 +45,11 @@ public class GameSnake extends JFrame {
             @Override
             public void keyPressed(KeyEvent e) {
                 super.keyPressed(e);
+                System.out.println(e);
                 snake.setDirection(e.getKeyCode());
             }
         });
+
 
         add(canvas);
         pack();
@@ -61,6 +64,7 @@ public class GameSnake extends JFrame {
         poison = new Poison(snake);
         snake.setFood(food);
         snake.setPoison(poison);
+        int currentDelay = SNAKE_DELAY;
 
         while (!gameOver) {
             snake.move();
@@ -72,8 +76,8 @@ public class GameSnake extends JFrame {
             if (food.isEaten()) {
                 food.appear();
                 poison.appear();
-                if (snake.size() % 5 == 0) {
-                    currentDelay--;
+                if ((snake.size() % 5) == 0) {
+                    currentDelay -= 15;
                 }
             }
             canvas.repaint();
