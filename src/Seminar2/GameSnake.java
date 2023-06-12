@@ -22,11 +22,12 @@ public class GameSnake extends JFrame {
     final int SNAKE_DELAY = 150;
     int snakeSize = 0;
     static boolean gameOver = false;
+    int currentDelay = SNAKE_DELAY;
 
     Canvas canvas;
     Snake snake;
     Food food;
-//    Poison poison;
+    Poison poison;
 
     public static void main(String[] args) {
         new GameSnake().game();
@@ -52,14 +53,14 @@ public class GameSnake extends JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
         setVisible(true);
-
-
     }
 
     private void game() {
         snake = new Snake(START_SNAKE_X, START_SNAKE_Y, START_SNAKE_SIZE, KEY_RIGHT);
         food = new Food(snake);
+        poison = new Poison(snake);
         snake.setFood(food);
+        snake.setPoison(poison);
 
         while (!gameOver) {
             snake.move();
@@ -70,9 +71,13 @@ public class GameSnake extends JFrame {
 
             if (food.isEaten()) {
                 food.appear();
+                poison.appear();
+                if (snake.size() % 5 == 0) {
+                    currentDelay--;
+                }
             }
             canvas.repaint();
-            sleep(SNAKE_DELAY);
+            sleep(currentDelay);
         }
         setTitle(GAME_OVER_MSG);
     }
@@ -93,7 +98,12 @@ public class GameSnake extends JFrame {
             g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             snake.paint(g2D);
             food.paint(g2D);
-//            poison.paint(g2D);
+            poison.paint(g2D);
+            if (gameOver) {
+                g.drawString(GAME_OVER_MSG, CANVAS_WIDTH * 2, CANVAS_HEIGHT * 2);
+                g.drawString("SCORE: " + snake.size(), CANVAS_WIDTH * 2, CANVAS_HEIGHT * 3);
+                canvas.setBackground(Color.YELLOW);
+            }
         }
     }
 }
