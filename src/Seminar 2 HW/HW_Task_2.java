@@ -6,13 +6,13 @@ public class HW_Task_2 {
         System.out.println(minMax(res));
     }
 
-    public static int minMax(int[] arr){
-        int min = arr.length;
+    public static int minMax(int[] arr) {
+        int min = arr[0];
         int max = 0;
-        for (int i : arr){
-            if (i > max){
+        for (int i : arr) {
+            if (i > max) {
                 max = i;
-            } else if (i < min){
+            } else if (i < min) {
                 min = i;
             }
         }
