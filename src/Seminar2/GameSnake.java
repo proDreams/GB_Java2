@@ -96,12 +96,15 @@ public class GameSnake extends JFrame {
             super.paint(g);
             Graphics2D g2D = (Graphics2D) g;
             g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            snake.paint(g2D);
-            food.paint(g2D);
-            poison.paint(g2D);
-            if (gameOver) {
+            if (!gameOver) {
+                snake.paint(g2D);
+                food.paint(g2D);
+                poison.paint(g2D);
+            } else {
+//                g.setColor(Color.GREEN);
+                g.setFont(new Font("Arial", Font.BOLD + Font.ITALIC, 40));
                 g.drawString(GAME_OVER_MSG, CANVAS_WIDTH * 2, CANVAS_HEIGHT * 2);
-                g.drawString("SCORE: " + snake.size(), CANVAS_WIDTH * 2, CANVAS_HEIGHT * 3);
+                g.drawString("SCORE: " + snake.size(), CANVAS_WIDTH * 2, CANVAS_HEIGHT * 4);
                 canvas.setBackground(Color.YELLOW);
             }
         }
