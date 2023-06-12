@@ -103,8 +103,8 @@ public class GameSnake extends JFrame {
             } else {
 //                g.setColor(Color.GREEN);
                 g.setFont(new Font("Arial", Font.BOLD + Font.ITALIC, 40));
-                g.drawString(GAME_OVER_MSG, CANVAS_WIDTH * 2, CANVAS_HEIGHT * 2);
-                g.drawString("SCORE: " + snake.size(), CANVAS_WIDTH * 2, CANVAS_HEIGHT * 4);
+                g.drawString(GAME_OVER_MSG, CANVAS_WIDTH * 6, CANVAS_HEIGHT * 10);
+                g.drawString("SCORE: " + snake.size(), CANVAS_WIDTH * 6, CANVAS_HEIGHT * 12);
                 canvas.setBackground(Color.YELLOW);
             }
         }
