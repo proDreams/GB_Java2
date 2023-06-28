@@ -8,7 +8,7 @@
 
 import java.util.ArrayList;
 
-public class Main {
+public class Main_3 {
     public static void main(String[] args) {
         ArrayList<Employee> employeeList = new ArrayList<>();
 
