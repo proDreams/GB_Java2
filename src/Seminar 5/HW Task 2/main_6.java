@@ -8,11 +8,10 @@
 // (распарсить файл, в зависимости от значений (0-3) нарисовать поле со значками 'х' 'о' '.'
 
 import java.io.*;
-import java.util.Arrays;
 
 public class main_6 {
     public static void main(String[] args) throws IOException {
-        int[] xoRows = new int[]{000, 000, 000};
+        int[] xoRows = new int[]{010, 010, 010};
         int[] converted = new int[3];
         byte[] xoData = new byte[3];
 
@@ -45,6 +44,9 @@ public class main_6 {
     }
 
     private static int convert_to_dec(int value) {
+        if (value == 0){
+            return value;
+        }
         StringBuilder res = new StringBuilder();
         while (value > 0) {
             res.append(value % 4);
